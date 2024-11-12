@@ -1,0 +1,148 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gym Equipment Classifier</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        h1 {
+            color: var(--text);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .upload-form {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        input[type="file"] {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px dashed var(--primary);
+            width: 80%;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px var(--primary);
+        }
+
+        .results {
+            margin-top: 40px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .prediction {
+            margin: 20px 0;
+            padding: 25px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .prediction h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .exercises {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            input[type="file"] {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gym Equipment Classifier</h1>
+        <div class="upload-form">
+            <form action="/predict" method="post" enctype="multipart/form-data">
+                <input type="file" name="image" accept="image/*" required>
+                <button type="submit" class="btn">Analyze Equipment</button>
+            </form>
+        </div>
+        {% if prediction %}
+        <div class="results">
+            <div class="prediction">
+                <h3>Detected Equipment: {{ prediction }}</h3>
+                <p>Confidence: {{ confidence }}%</p>
+            </div>
+            <h3>Recommended Exercises:</h3>
+            <div class="exercises">
+                {{ exercises | safe }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+flask
+tensorflow
+numpy
+google-generativeai
+markdown2
+werkzeug==3.0.1
+matplotlib
