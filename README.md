@@ -15,6 +15,11 @@ Dataset/
     Kettlebell/
     Pull-up_bar/
     Resistance bands/
+exercise_dataset/
+    equipment/
+    Muscle/
+    Exercise/
+    Instructions/
 Gym_Equipment_Classification.ipynb
 gym_equipment_classifier.h5
 templates/
@@ -25,12 +30,11 @@ uploads/
 ## How to run the project
 
 1. Clone the repository
-2. Add gemini API key and secret to the .env file
-3. Install the required libraries using the following command:
+2. Install the required libraries using the following command:
 ```bash
 pip install -r requirements.txt
 ```
-4. Run the following command to start the server:
+3. Run the following command to start the server:
 ```bash
 python app.py
 ```
